@@ -29,7 +29,7 @@ public class EhCacheImpl implements CacheImpl {
 
     private EhCacheImpl() {
         this.cacheManager = CacheManager.create();
-        this.cacheManager.addCache(cacheName);
+        this.cacheManager.addCacheIfAbsent(cacheName);
         this.cache = cacheManager.getCache(cacheName);
     }
 
