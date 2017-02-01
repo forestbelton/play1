@@ -431,7 +431,12 @@ public class ApplicationClassloader extends ClassLoader {
 
                 }
 
-                if (Boolean.parseBoolean(System.getenv("DISABLE_PARALLEL_CLASSLOADING"))) {
+                String parallelizationFlag = System.getenv("DISABLE_PARALLEL_CLASSLOADING");
+                if (parallelizationFlag == null) {
+                    parallelizationFlag = "true";
+                }
+
+                if (Boolean.parseBoolean(parallelizationFlag)) {
                     for (ApplicationClass applicationClass : Play.classes.all()) {
                         Class clazz = loadApplicationClass(applicationClass.name);
                         if (clazz != null) {
